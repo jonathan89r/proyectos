@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+            <p:growl>
+                <p:autoUpdate/>
+            </p:growl>
+            <center><h:form id="form1">
+                    <h1><h:outputText value="Create/Edit"/></h1>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="IdProyeccion"/>
+                        <p:inputText id="idProyeccion" value="#{bean_proyeccion.id_proyeccion}" title="IdProyeccion" readonly="true"/>
+                        <p:outputLabel value="Proyeccionmensual" for="proyeccionmensual" />
+                        <p:inputText id="proyeccionmensual" value="#{bean_proyeccion.proyeccionmensual}" title="Proyeccionmensual" />
+                        <p:outputLabel value="Inventario"/>
+                        <p:selectOneMenu id="inventario" value="#{bean_proyeccion.inventario}" required="true" requiredMessage="The Inventario field is required.">
+                            <f:selectItems value="#{bean_proyeccion.inven}" var="inv" itemLabel="#{inv.producto.nombre}" itemValue="#{inv.idInventario}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Venta"/>
+                        <p:selectOneMenu id="venta" value="#{bean_proyeccion.venta}" required="true" requiredMessage="The Venta field is required.">
+                            <f:selectItems value="#{bean_proyeccion.deta}" itemLabel="#{deta.idVenta.idVenta}" var="deta" itemValue="#{deta.idDetalle}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <center><p:commandButton update=":form2" value="GUARDAR" icon="ui-icon-circle-plus" action="#{bean_proyeccion.guardar()}"/></center>
+                </h:form></center>
+        </f:view>
+
+
+        <f:view>
+
+
+            <h:form id="form2">
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{bean_proyeccion.lista}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Producto"/>
+                        </f:facet>
+                        <h:outputText value="#{item.inventario.producto.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Codigo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.venta.idVenta.codigo.codigo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Existencias"/>
+                        </f:facet>
+                        <h:outputText value="#{item.inventario.existencias}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Venta"/>
+                        </f:facet>
+                        <h:outputText value="#{item.venta.idVenta.cantidad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Proyeccion mensual"/>
+                        </f:facet>
+                        <h:outputText value="#{item.proyeccionmensual}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Necesidad compra"/>
+                        </f:facet>
+                        <h:outputText value="#{item.necesidadcompra}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+
+    </h:body>
+</html>
+

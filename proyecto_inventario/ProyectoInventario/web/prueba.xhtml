@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <link rel="icon" href=" "/>
+
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- Custom styles for this template -->
+        <link href="css/custom.css" rel="stylesheet"/>
+
+        <!-- Helper Styles -->
+        <link href="css/loaders.css" rel="stylesheet"/>
+        <link href="css/swiper.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/animate.min.css"/>
+        <link rel="stylesheet" href="css/nivo-lightbox.css"/>
+        <link rel="stylesheet" href="css/nivo_themes/default/default.css"/>
+        <!-- Font Awesome Style -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+
+        <link rel="icon" type="image/png" href="../image/agregar.png" />
+
+    </h:head>
+    <style>
+        .ui-widget-content{
+            font-family:calibri;
+        }
+        .ui-spinner-input{
+            width: 100px;
+        }
+        .ui-button-icon-only:hover{
+            background: #2E9AFE;
+        }
+    </style>
+    <h:body>
+       
+        <!-- Top Navigation -->
+        <nav class="navbar navbar-toggleable-md mb-4 top-bar navbar-static-top sps sps--abv">
+            <div class="container" style="background: black;height: 80px;border-radius: 15px;">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse1" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="index.xhtml">Tech<span>Computer</span></a>
+                <div class="collapse navbar-collapse offset-1" id="navbarCollapse1">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"> <a class="nav-link" href="index.xhtml">Cerrar Sesion</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br/><br/><br/><br/><br/><br/>
+        <div class="container">
+            <h:form id="factura">
+                <p:growl>
+                    <p:autoUpdate/>
+                </p:growl>
+                <div class="container">
+                    <div class=" table-info" style="width: auto;">
+                        <div class="row text-center">
+                            <div class="col-12 heading" style="background: #2E9AFE;color: white;height: 65px;">
+                                <h1 style="position: relative;top: 5px;font-family: calibri;font-weight: 200;font-size: 50px;">Factura</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 heading">
+                                <h4><small>Vendedor</small></h4> 
+                            </div>
+                            <div class="col-4 heading">
+                                <h:selectOneMenu  value="#{addCar.id_vendedor}" class="form-control" style="width: 150px;">
+                                    <f:selectItems var="cl" value="#{addCar.listaVendedores}" itemLabel="#{cl.nombreVendedor}" itemValue="#{cl.idVendedor}"/>
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="col-2 heading">
+                                <h4><small>Cliente</small></h4>
+                            </div>
+                            <div class="col-3 heading">
+                                <h:selectOneMenu  value="#{addCar.id_cliente}" class="form-control" style="width: 150px;">
+                                    <f:selectItems var="cli" value="#{beanCliente.listaClientes}" itemLabel="#{cli.nombreCliente}" itemValue="#{cli.idCliente}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 heading">
+                                <h4><small>Tipo de pago</small></h4>
+                            </div>
+                            <div class="col-3 heading">
+                                <h:selectOneMenu  value="#{addCar.tipo_pago}" class="form-control" style="width: 150px;">
+                                    <f:selectItems var="fact" value="#{beanFactura.listaTipoPago}" itemLabel="#{fact.tipoPago}" itemValue="#{fact.idTipoPago}"/>
+                                </h:selectOneMenu> 
+                            </div>
+                            <div class="col-3 heading text-center">
+                                <h4><small>Inventario</small></h4>
+                            </div>
+                            <div class="col-2">
+                                <h:selectOneMenu  value="#{addCar.id_inventario}" class="form-control" style="width: 150px;">
+                                    <f:selectItems var="cl" value="#{beaninventario.listaInventario}" itemLabel="#{cl.idInventario}" itemValue="#{cl.idInventario}"/>
+                                </h:selectOneMenu> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <p:dataTable var="c" value="#{beanProductos.listaproductos}" editable="true" editMode="cell">
+                    <p:column headerText="Codigo" style="width: 200px;">
+                        <h:outputText value="#{c.codigoProducto}" />
+                    </p:column>
+
+                    <p:column headerText="Nombre del producto" style="width: 200px;">
+                        <h:outputText value="#{c.nombreProducto}" />
+                    </p:column>
+
+                    <p:column headerText="Precio" style="width: 150px;">
+                        <h:outputText value="$#{c.precio} C/U" />
+                    </p:column>
+                    <p:column headerText="Cantidad" style="width: 100px;">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <acronym title="Haz click">
+                                    <p:spinner value="#{addCar.cantidad}"  min="0"/>
+                                </acronym>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:spinner value="#{addCar.cantidad}" min="1"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column style="width: 40px;">
+                        <acronym title="Agregar">
+                            <p:commandButton icon="ui-icon-cart" actionListener="#{addCar.añadirAlCarrito(c, addCar.cantidad)}" update="factura"/>
+                        </acronym>
+                    </p:column>
+                </p:dataTable>
+
+                <br/>
+                <p:dataTable value="#{addCar.listaCarrito}" var="p" class="text-center">
+
+                    <p:column headerText="Codigo" style="width: 200px;">
+                        <h:outputText value="#{p.codigo}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre del producto" style="width: 200px;">
+                        <h:outputText value="#{p.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Precio" style="width: 150px;">
+                        <h:outputText value="$#{p.precio}"/>
+                    </p:column>
+
+                    <p:column headerText="Cantidad" style="width: 150px;">
+                        <h:outputText value="#{p.cantidad}"/>
+                    </p:column>
+
+                    <p:column headerText="Total/iva incluido" style="width: 150px;">
+                        <h:outputText value="$#{p.totales}"/>
+                    </p:column>
+
+                    <p:column style="width: 50px;">
+                        <p:commandButton icon="ui-icon-trash" actionListener="#{addCar.Remover(p.id)}" update="factura"/>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <div id="total">
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <h2 class="alert-info" style="padding-top: 10px;">
+                                TOTAL USD $
+                                <h:outputLabel value="#{addCar.acumulador}"/>
+                            </h2>
+                        </div>
+                        <div class="col-6 text-center">
+                            <h2 class="alert-info" style="padding-top: 10px;">
+                                <h:outputLabel value="#{addCar.acumuladorProductos}"/>
+                                productos
+                            </h2>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-2">
+                            <p:commandButton value="Guardar" style="width: 150px;font-weight: 400;height: 40px;" actionListener="#{addCar.guardarFacturaVendedor()}"  update="factura"/>
+                        </div>  
+                    </div> 
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

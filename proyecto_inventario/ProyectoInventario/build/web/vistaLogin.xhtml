@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Login</title>
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="../resources/images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../resources/vendor/bootstrap/css/bootstrap.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../resources/fonts/iconic/css/material-design-iconic-font.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../resources/vendor/animate/animate.css"/>
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="../resources/vendor/css-hamburgers/hamburgers.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../resources/vendor/animsition/css/animsition.min.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../resources/vendor/select2/select2.min.css"/>
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="../resources/vendor/daterangepicker/daterangepicker.css"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../resources/css/util.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/main.css"/>
+        <!--===============================================================================================-->
+    </h:head>
+    <style>
+        .cajas{
+            width: 300px;
+            margin: auto;
+        }
+        .ui-button{
+            font-family: Poppins-Medium;
+            font-size: 16px;
+            color: #555555;
+            line-height: 1.2;
+            border-radius: 25px;
+            outline: none !important;
+            border: none;
+            box-sizing: border-box;          
+            width: 170px;
+            height: 45px;
+            background: white;
+
+        }
+        .ui-button:hover{
+            font-size: 20px;
+        }
+        a:hover{
+            font-size: 16px;
+        }
+        .ui-inputfield:hover{
+            font-size: 20px;
+        }
+        img{
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            height: 122px;
+            width: 130px;
+        }
+
+    </style>
+    <h:body>
+
+        <h:form id="panel">
+            <p:growl>
+                <p:autoUpdate/>
+            </p:growl>
+            <p:growl id="msgs" showDetail="true"/>
+
+            <div class="limiter">
+                <div class="container-login100" style="background-image: url('../resources/images/fo2.jpg');">
+                    <div class="wrap-login100">
+                        <span class="login100-form-logo">
+                            <acronym title="Pagina principal">
+                                <a href="index.xhtml">
+                                    <img src="resources/images/logo.png"/>
+                                </a> 
+                            </acronym>
+                        </span>
+
+                        <br/><br/>
+
+                        <div>
+                            <p:inputText required="true" placeholder="Usuario" requiredMessage="Usuario es obligatorio"  value="#{loginBean.user}" class="form-control"/>
+                        </div>
+
+                        <br/><br/>
+
+                        <div>
+                            <p:inputText id="pass" type="Password" required="true" placeholder="password" requiredMessage="Password es obligatorio" class="form-control" value="#{loginBean.pass}"/>
+                        </div>
+
+                        <br/><br/>
+
+                        <center><div style="margin: auto;">
+                                <p:commandButton  update="panel" value="Ingresar"  id="boton"  action="#{loginBean.loginvalidar()}"/>
+                            </div></center>
+                        <div class="text-center p-t-90">
+                            <a class="txt1" href="vistaRecuperacionContraseña.xhtml">
+                                ¿Olvistaste tu contraseña?
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

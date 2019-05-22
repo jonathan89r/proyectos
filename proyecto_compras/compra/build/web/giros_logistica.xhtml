@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./principal_logistica.xhtml">
+
+            <ui:define name="content">
+                <table cellpadding="15px">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p:growl>
+                                <p:autoUpdate/>
+                            </p:growl>
+                            <center><h:form id="vista">
+                                    <div class="tittle-table2">
+                                        <center>
+                                            <div class="tittle">
+                                                <h3 style="color: white; size: 25px;">Giros Comerciales</h3>
+                                            </div>
+                                        </center>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                    <p:dataTable value="#{bean_proveedor.listaGiros}" style="text-align: center" var="item">
+                                        <p:column style="width: 50px">
+                                            <f:facet name="header">
+                                                <h:outputText value="Id Giro"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.idGiro}"/>
+                                        </p:column>
+                                        <p:column style="width: 150px">
+                                            <f:facet name="header">
+                                                <h:outputText value="Giro Comercial"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.nombreGiro}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form></center>
+                        </td>
+                        <td>
+                            <h:form>
+                                <div class="tittle-table2">
+                                    <center>
+                                        <div id="title">
+                                            <h3 style="color: white">Estados de los Proveedores</h3>
+                                        </div>
+                                    </center>
+                                </div>
+                                <br/>
+                                <br/>
+                                <p:dataTable style="text-align: center" value="#{bean_proveedor.listaEstados}" var="item">
+                                    <p:column style="width: 50px">
+                                        <f:facet name="header">
+                                            <h:outputText value="Id"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idEstadoGlobal}"/>
+                                    </p:column>
+                                    <p:column style="width: 120px">
+                                        <f:facet name="header">
+                                            <h:outputText value="Tipo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombre}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
+                        </td>
+                    </tr>
+                </table>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

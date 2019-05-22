@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>INDEX</title>
+        <link rel="shortcut icon"  href="#{request.contextPath}/resources/image/icono.ico"/>
+        <h:outputStylesheet library="image" name="icono.ico"/>
+    </h:head>
+    <style>
+        .body{
+            background-image: url(#{request.contextPath}/resources/image/fondo.jpg) !important;
+        }
+        #pie {
+            color: #ffffff;    
+            clear: both;
+            text-align: center;
+            padding: 20px;
+            border-top: 2px solid #999999;
+        }
+    </style>
+    <h:body styleClass="body">
+        <p:growl autoUpdate="true">
+        </p:growl>
+        <center>
+            <br/>
+            <br/>
+            <br/>
+            <h:form id="form" style="border-radius: 15px;background: transparent;width: 620px; height: 750px;text-align: center">
+                <center>
+                    <p:panel style="background-color: #000;width: 610px; height: 730px;position: relative;border-radius: 15px;">
+                        <br/>
+                        <center><h1 style="color: deepskyblue;font-family: impact;font-size: 45px"><b>SISTEMA DE COMPRAS</b></h1></center>
+                        <br/>
+                        <center><p:graphicImage url="/resources/image/log.png" width="200" height="180" /></center>
+                        <br/>
+                        <br/>
+                        <center><h:panelGrid columns="2" style="color: white;width: 500px; height: 100px;text-align: center">
+                                <p:graphicImage alt="HOLA MUNDO" url="/resources/image/cor.png" width="70" height="70" />
+                                <p:inputText requiredMessage="NOMBRE DE USUARIO ES REQUERIDO" required="true" placeholder="NOMBRE DE USUARIO" style="width: 270px;background-color: #ccffff;"  value="#{bean_login.usuario}" id="usuario" class="form-control"/>
+                                <p:graphicImage url="/resources/image/cont.png" width="70" height="80" />
+                                <p:password requiredMessage="CONTRASEÑA ES REQUERIDA" required="true" placeholder="CONTRASEÑA" style="width: 270px;background-color: #ccffff;" value="#{bean_login.pass}" id="password" class="form-control"/>                     
+                            </h:panelGrid>
+                        </center>
+                        <br/>
+                        <center><p:commandButton style="background-color: deepskyblue" icon="ui-icon-power" value="Ingresar" update="@form" action="#{bean_login.ir()}"/></center>
+                        <br/>
+                        <br/>
+                        <center><h:link style="color: #0275d8;text-decoration: none" outcome="recuperacion" value="¿OLVIDO SU CONTRASEÑA?"/></center>
+
+                    </p:panel>
+                </center>
+            </h:form></center>
+        <br/>
+        <br/>
+        <b><footer id="pie">
+                All rights reserved | c_compra™ 2019  
+            </footer></b>
+    </h:body>
+</html>
+

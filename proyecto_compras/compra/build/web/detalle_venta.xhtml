@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:growl>
+            <p:autoUpdate/>
+        </p:growl>
+        <h:form id="panel">
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Venta"/>
+                <p:selectOneMenu value="#{bean_detalle_venta.id_venta}">
+                    <f:selectItems value="#{bean_detalle_venta.listaVentas}" var="c" itemLabel="#{c.idVenta}" itemValue="#{c.idVenta}"/>
+
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Fecha"/>
+                <p:inputMask mask="99-99-9999" value="#{bean_detalle_venta.fecha}" required="true" requiredMessage="Fecha es requerida"/>
+
+                <p:outputLabel value="Comprador"/>
+                <p:inputText value="#{bean_detalle_venta.comprador}" required="true" requiredMessage="Comprador es requerido"/>
+            </p:panelGrid>
+            <p:commandButton value="guardar" actionListener="#{bean_detalle_venta.guardar()}" update="panel, vista"/>
+        </h:form>
+
+        <h:form id="vista">
+            <p:dataTable value="#{bean_detalle_venta.listadeta}" var="te">
+
+                <p:column headerText="Venta">
+                    <p:outputLabel value="#{te.idVenta.idVenta}"/>
+                </p:column>
+
+                <p:column headerText="fecha">
+                    <p:outputLabel value="#{te.fecha}"/>
+                </p:column>
+
+                <p:column headerText="comprador">
+                    <p:outputLabel value="#{te.comprador}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton icon="ui-icon-trash" actionListener="#{bean_detalle_venta.eliminar(te.idDetalle)}" update="vista"/>
+                    <p:commandButton icon="ui-icon-pencil" actionListener="#{bean_detalle_venta.mostrarPorID(te.idDetalle)}" update="ventana2" onclick="PF('ventana').show();"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <p:dialog widgetVar="ventana" showEffect="fade" hideEffect="fade" resizable="false">
+            <h:form id="ventana2">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="ID_detalle"/>
+                    <p:inputText value="#{bean_detalle_venta.id_venta}"/>
+
+                    <p:outputLabel value="id_venta"/>
+                    <p:inputText value="#{bean_detalle_venta.id_detalle_venta}"/>
+
+                    <p:outputLabel value="Venta"/>
+                    <p:selectOneMenu value="#{bean_detalle_venta.id_venta}">
+                        <f:selectItems value="#{bean_detalle_venta.listaVentas}" var="c" itemLabel="#{c.idVenta}" itemValue="#{c.idVenta}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Fecha"/>
+                    <p:inputMask mask="99-99-9999" value="#{bean_detalle_venta.fecha}" required="true" requiredMessage="Fecha es requerida"/>
+
+                    <p:outputLabel value="Comprador"/>
+                    <p:inputText value="#{bean_detalle_venta.comprador}" required="true" requiredMessage="Comprador es requerido"/>
+                </p:panelGrid>
+                <p:commandButton value="guardar" actionListener="#{bean_detalle_venta.actualizar(c.idVenta)}" update="vista"/>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

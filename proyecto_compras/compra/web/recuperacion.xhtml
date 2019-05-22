@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <style>
+        .body{
+            background-image: url(#{request.contextPath}/resources/image/fondo.jpg) !important;
+        }
+        #pie {
+            color: #ffffff;    
+            clear: both;
+            text-align: center;
+            padding: 20px;
+            border-top: 2px solid #999999;
+        }
+    </style>
+    <h:body styleClass="body">
+        <p:growl autoUpdate="true">
+        </p:growl>
+        <center>
+            <br/>
+            <br/>
+            <br/>
+            <h:form id="form" style="border-radius: 15px;background: transparent;width: 720px; height: 450px;text-align: center">
+                <center>
+                    <p:panel style="background-color: #000;width: 710px; height: 430px;position: relative;border-radius: 15px;">
+                        <br/>
+                        <center><h1 style="color: deepskyblue;font-family: impact;font-size: 45px"><b>RECUPERACION DE CONTRASEÑA</b></h1></center>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <center>
+                            <h:panelGrid columns="2" style="color: white;width: 600px; height: 100px;text-align: center">
+                                <h:outputLabel value="USUARIO :" style="color: deepskyblue"/>
+                                <h:inputText value="#{bean_login.usuario}" required="true" requiredMessage="NOMBRE DE USUARIO ES REQUERIDO"/>
+                                <h:outputLabel value="CODIGO DE EMPLEADO :" style="color: deepskyblue"/>
+                                <h:inputText value="#{bean_login.codEmpleado}" requiredMessage="CODIGO DE EMPLEADO ES REQUERIDO" required="true"/>
+                            </h:panelGrid>
+                        </center>
+                        <br/>
+                        <center><p:commandButton style="background-color: deepskyblue" icon="ui-icon-circle-check" value="Comprobar" update="@form" action="#{bean_login.usuariovalidar()}"/></center>
+                        <br/>
+                        <br/>
+
+
+                    </p:panel>
+                </center>
+            </h:form></center>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <b><footer id="pie">
+                All rights reserved | c_compra™ 2019  
+            </footer></b>
+    </h:body>
+</html>
+

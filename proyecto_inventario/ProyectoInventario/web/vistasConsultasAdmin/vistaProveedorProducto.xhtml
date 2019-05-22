@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+                <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-clearmin.min.css"></link>
+                <link rel="stylesheet" type="text/css" href="../assets/css/roboto.css"></link>
+                <link rel="stylesheet" type="text/css" href="../assets/css/material-design.css"></link>
+                <link rel="stylesheet" type="text/css" href="../assets/css/small-n-flat.css"></link>
+                <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.min.css"></link>
+                <title>Administrador</title>
+            </meta>
+        </meta>
+        <style>
+            .ui-datatable-header{
+                background: #2E9AFE !important;
+            }
+            img{
+                position: relative;
+                border-radius: 8px;
+                height: 45px;
+                top: 2px;
+            }
+            #copi{
+                position:  relative;
+                top: 330px;
+                right: 50px;
+            }
+            .table-bordered{
+                border: none;
+            }
+            .col-lg-10{
+                border: none;
+                position: relative;
+                top: 100px;
+                left: 100px;
+            }
+            .ui-panel-titlebar{
+                background: #2E9AFE !important;
+            }
+            .ui-dialog-titlebar {
+                background: #2E9AFE !important;
+            }
+            .ui-widget-header{
+                background: #2E9AFE !important;
+            }
+            .ui-growl-item{
+                background: white;
+                color: black;
+
+            }
+            .ui-growl-image{
+                display: none;
+            }
+
+        </style>
+    </h:head>
+    <h:body class="cm-no-transition cm-1-navbar" style="background-color: #000 !important">
+
+        <div id="cm-menu">
+            <nav class="cm-navbar cm-navbar-primary">
+                <div class="cm-flex"><a >
+
+                        <img src="../image/TECHLOGO.JPG" height="49px" width="210px"/>
+                    </a></div>
+                <div class="btn btn-primary md-menu-white" data-toggle="cm-menu"></div>
+            </nav>
+            <div id="cm-menu-content">
+                <div id="cm-menu-items-wrapper">
+                    <div id="cm-menu-scroller">
+                        <ul class="cm-menu-items">
+                            <li ><a href="../vistasConsultasAdmin/vistaInicioAdmin.xhtml"  class="sf-user-male">Perfil</a></li>
+
+                            <li class="cm-submenu">
+                                <a class="sf-search">Consultar<span class="caret"></span></a>
+                                <ul>
+                                    <li><a href="../vistasConsultasAdmin/vistaCliente.xhtml">Clientes registrados</a></li>
+                                    <li><a href="../vistasConsultasAdmin/vistaVendedores.xhtml">Vendedores registrados</a></li>
+                                    <li><a href="../vistasConsultasAdmin/vistaInventario.xhtml">Inventario registrado</a></li>
+                                    <li><a href="../vistasConsultasAdmin/vistaProveedores.xhtml">Proveedor registrado</a></li>
+                                    <li><a href="../vistasConsultasAdmin/vistaProductos.xhtml">Producto registrado</a></li>
+                                    <li><a href="../vistasConsultasAdmin/vistaFactura.xhtml">Facturas registradas</a></li>
+                                    <li><a href="../vistasConsultasAdmin/vistaProveedorProducto.xhtml">Producto proveedor registrado</a></li>
+                                    <li><a href="../vistasConsultasAdmin/vistaSucursal.xhtml">Sucursales registradas</a></li>
+                                </ul>
+                            </li>
+                            <li class="cm-submenu">
+                                <a class="sf-floppy">Insertar <span class="caret"></span></a>
+                                <ul>
+                                    <li><a href="../vistasIngresarAdmin/ingresarCuentaAdmin.xhtml" >Insertar usuario</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarCliente.xhtml">Insertar Cliente</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarFactura.xhtml">Insertar Factura</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarProveedor.xhtml">Insertar Proveedor</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarInventario.xhtml">Insertar Inventario</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarProductos.xhtml">Insertar Productos</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarProveedorProducto.xhtml">Insertar Proveedor/Producto</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarSucursal.xhtml">Insertar Sucursal</a></li>
+                                    <li><a href="../vistasIngresarAdmin/ingresarVendedor.xhtml">Insertar Vendedor</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                        <center>
+                            <footer id="copi">
+                                &copy; TechComputer
+                            </footer>
+                        </center> 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header id="cm-header">
+            <nav class="cm-navbar cm-navbar-primary">
+                <div class="btn btn-primary md-menu-white hidden-md hidden-lg" data-toggle="cm-menu"></div>
+                <div class="cm-flex">
+                    <h1>Consultas de Proveedor-Producto</h1> 
+
+                </div>
+
+
+                <div class="dropdown pull-right">
+                    <button class="btn btn-primary md-account-circle-white" data-toggle="dropdown"></button>
+                    <ul class="dropdown-menu">
+                        <li class="disabled text-center">
+                            <a> Usuario: <h:outputLabel value="#{beanVendedores.nombre_vendedor}" ></h:outputLabel> 
+                                <h:outputLabel value="#{beanVendedores.apellido_vendedor}"  ></h:outputLabel> 
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="../vistasConsultasAdmin/vistaInicioAdmin.xhtml"><i class="fa fa-fw fa-user"></i> Perfil</a>
+                        </li>                     
+                        <li>
+                            <a href="../index.xhtml"><i class="fa fa-fw fa-sign-out"></i> Cerrar Sesion</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <br/>
+        <div class="container-fluid" style="background-color: #000 !important">
+            <div class="row container">
+
+
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div>
+                            <div id="chart_div_3" > 
+                                <!--                                iNFORMACION DE LOS PROVEEDORES DE PRODUCTO-->
+                                <h:form id="panel">
+                                    <p:dataTable var="pro" class="text-center" value="#{beanProveedor_Producto.listaProveedor}" id="up">
+                                        <f:facet name="header">
+                                            Tabla Proveedor Producto
+                                        </f:facet>
+
+                                        <p:column class="text-dark" headerText="Proveedor_Producto" >
+                                            <h:outputText value="${pro.idProveedorProducto}"/>
+                                        </p:column>
+
+                                        <p:column class="text-dark" headerText="Proveedor" >
+                                            <h:outputText value="${pro.idProveedor.contacto}"/>
+                                        </p:column>
+
+                                        <p:column class="text-dark" headerText="Producto" >
+                                            <h:outputText  value="${pro.idProducto.nombreProducto}"/>
+                                        </p:column>
+
+                                        <p:column class="text-dark" headerText="Ubicacion Proveedor" >
+                                            <h:outputText  value="${pro.idProveedor.ubicacionProveedor}"/>
+                                        </p:column>
+
+                                        <p:column class="text-dark" headerText="Action">
+                                            <p:commandButton  update="panel"  icon="ui-icon-trash" style="background: white;color: black;" actionListener="#{beanProveedor_Producto.delete(pro.idProveedorProducto)}"/>
+                                            <p:commandButton   onclick="PF('ventana').show();" update="editarInfo" icon="ui-icon-pencil" style="background: white;;color: black;" actionListener="#{beanProveedor_Producto.consultarProveedorporID(pro.idProveedorProducto)}"/>
+
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                                
+                                <!--VENTANA PARA ACTUALIZAR DATOS-->
+                                <p:dialog header="" widgetVar="ventana" modal="true"  showEffect="fade" hideEffect="fade" resizable="false">
+                                    <h:form id="editarInfo">
+                                        <p:panel header="Actualizar Informacion" id="panel" style="text-align: center;width: 400px;margin: auto;height: 220px;" >
+                                            <p:panelGrid columns="2" style="width: 360px;" >
+
+                                                <p:outputLabel value="id_proveedor_producto" style="display: none;"/>
+                                                <p:inputText required="true" requiredMessage="codigo es obligatorio" style="display: none;" value="#{beanProveedor_Producto.id_proveedor_producto}"/>
+
+                                                <p:outputLabel value="Id proveedor"/>
+                                                <p:selectOneMenu required="true" requiredMessage="Id proveedor es requerido" value="#{beanProveedor_Producto.id_proveedor}" style="width: 200px;">
+                                                    <f:selectItems value="#{beanProveedor_Producto.listaProve}" var="prro" itemLabel="#{prro.contacto}" itemValue="#{prro.idProveedor}"/>
+                                                </p:selectOneMenu>
+
+                                                <p:outputLabel value="id producto"/>
+                                                <p:selectOneMenu required="true" requiredMessage="id producto es requerido" value="#{beanProveedor_Producto.id__producto}" style="width: 200px;">
+                                                    <f:selectItems value="#{beanProveedor_Producto.listaProductos}" var="prr" itemLabel="#{prr.nombreProducto}" itemValue="#{prr.idProducto}"/>
+                                                </p:selectOneMenu>  
+
+                                            </p:panelGrid>
+
+                                            <p:commandButton value="Actualizar Datos" update="panel"  style="background: #2E9AFE;color: white;width: 200px;height: 35px;top: 15px;font-family: calibri;"  actionListener="#{beanProveedor_Producto.actualizar(id_proveedor_producto)}"/>
+                                            <p:growl id="msgs" showDetail="true"/>
+                                        </p:panel>
+                                    </h:form>
+                                </p:dialog>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <script src="../assets/js/jquery.mousewheel.min.js"></script>
+        <script src="../assets/js/jquery.cookie.min.js"></script>
+        <script src="../assets/js/fastclick.min.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/clearmin.min.js"></script>
+
+    </h:body>
+</html>
+

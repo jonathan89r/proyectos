@@ -1,0 +1,47 @@
+
+body {
+
+    font-family: "hola", calibri;
+    margin: 0;
+    padding: 0;
+    line-height: 2;
+
+}
+
+#banner {
+
+    background: #363636;
+    color: white;
+    font-weight: 300;
+    font-size: 30px;
+
+}
+
+#formulario {
+
+    margin: auto;
+    margin-top: 30px;
+
+}
+
+.ui-state-default {
+
+    background: #363636;
+    color: white;
+    font-weight: 300;
+
+}
+
+.inputSolicitud {
+
+    width: 70%;
+
+}
+
+.ui-dialog-titlebar {
+    
+    background: #363636;
+    
+}
+
+

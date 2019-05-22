@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>SISTEMA DE COMPRAS</title>
+        <link rel="shortcut icon"  href="#{request.contextPath}/resources/image/icono.ico"/>
+        <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="bootstrap/css" name="bootstrap-responsive.min.css"/>
+        <h:outputStylesheet library="css" name="theme.css"/>
+        <h:outputStylesheet library="images/icons/css" name="font-awesome.css"/>
+    </h:head>
+    <style>
+        .ui-state-default {
+
+            background: #393939;
+            color: white;
+            font-size: 17px;
+            font-weight: 400;
+
+        }
+
+        .ui-button {
+
+            background: white !important;
+
+        }
+    </style>
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <header>
+                    <div class="header__bg"></div>
+                    <div id="menu">
+
+                        <div id="nav">
+                            <div class="navbar navbar-fixed-top">
+                                <div class="navbar-inner">
+                                    <div class="container">
+                                        <a class="brand name_program"><p:graphicImage library="images" name="logo.png"/></a>
+                                        <div class="nav-collapse collapse navbar-inverse-collapse">
+                                            <br/><br/>
+                                            <ul class="nav pull-right">
+                                                <h:form>
+                                                    <p:commandLink onclick="PF('usuario').show();">
+                                                        <p:graphicImage library="images" name="user.png" class="nav-avatar"/>
+                                                        <p:commandButton icon="	ui-icon-grip-dotted-vertical" class="botonMenu"/>
+                                                    </p:commandLink>
+                                                </h:form>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </ui:insert>
+        </div>
+
+        <div class="wrapper">
+            <div class="container">
+                <div class="row">
+
+
+                    <div id="left">
+                        <ui:insert name="left">
+                            <div class="span3">
+                                <div class="sidebar">
+                                    <h:form>
+                                        <ul class="widget widget-menu unstyled">
+                                            <li class="active" style="text-align: center;font-size: 19px;font-family: arial;"><a href="faces/principal_logistica.xhtml">Inicio</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="widget widget-menu unstyled">
+                                            <li style="text-align: center;"><a class="collapsed" data-toggle="collapse" href="#togglePages"><i>
+                                                    </i><i class=" pull-right"></i><i class="pull-right">
+                                                    </i>Registros de Bodega</a>
+                                                <ul id="togglePages" class="collapse unstyled">
+                                                    <li><a href="faces/logistica.xhtml" >Ver Productos</a></li>
+                                                </ul>
+                                            </li>
+                                            <li style="text-align: center;"><a class="collapsed" data-toggle="collapse" href="#togglePages2"><i>
+                                                    </i><i class=" pull-right"></i><i class="pull-right">
+                                                    </i>Proveedores</a>
+                                                <ul id="togglePages2" class="collapse unstyled">
+                                                    <li><a href="faces/proveedor_logistica.xhtml">Lista de Proveedores</a></li>
+                                                    <li><a href="faces/categoria_logistica.xhtml">Categorias de los productos</a></li>
+                                                    <li><a href="faces/giros_logistica.xhtml">Giros de los Proveedores</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <ul class="widget widget-menu unstyled">
+                                            <li style="text-align: center;">
+                                                <p:commandLink value="Cerrar Sesion" actionListener="#{bean_login.cerrarSession()}"/>
+                                            </li>
+                                        </ul>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </ui:insert>
+                    </div>
+                    <div id="content" class="left_content">
+                        <ui:insert name="content">
+
+                            <div class="span9">
+                                <div class="content">
+                                    <div class="btn-controls">
+                                        <div class="span9">
+                                            <div class="content">
+                                                <div class="module">
+                                                    <div class="module-body">
+                                                        <br/><br/>
+                                                        <div class="tittle-table">
+
+                                                            <div id="title">
+                                                                <center>BIENVENIDO USUARIO: #{bean_login.nombre} #{bean_login.apellido}</center>
+                                                            </div>
+                                                        </div>
+                                                        <br/>
+                                                        <br/>
+                                                        <center><h:graphicImage url="/resources/image/logistica.gif" width="520" height="520"/></center>
+                                                        <br/>
+                                                        <br/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:insert>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">
+                <div class="footer">
+                    <br/>
+                    <div class="container" id="copiright">
+                        <hr style="width: 80%;margin: auto;"/>
+                        <br/>
+                        <b style="color: white;font-family: arial;">&copy; All rights reserved | c_compra™ 2019</b>.
+                    </div>
+                </div>
+                <p:dialog widgetVar="usuario" showEffect="fade" hideEffect="fade" resizable="false" header="Usuario">
+                    <h:form>
+                        <p:panelGrid columns="1">
+                            <p:commandLink onclick="PF('datos').show();" value="informacion de usuario" actionListener="#{bean_login.consultarDatos()}" update="datos"/>
+                            <p:commandLink onclick="PF('editar').show();" update=":editar" value="Editar datos de usuario" action="#{bean_gerencia.mostrarporID(bean_login.se)}"> </p:commandLink>
+                        </p:panelGrid>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog widgetVar="datos" width="400" height="200" showEffect="fade" hideEffect="fade" resizable="false" header="Informacion de usuario">
+                    <center> <h:form id="datos">
+                            <br/>
+                            <h:panelGrid  style="text-align: center" columns="2">
+                                <p:outputLabel value="CODIGO DE EMPLEADO :" />
+                                <p:outputLabel value="#{bean_login.codEmpleado}" transient="true" style="color: #0081c2"/>
+                                <p:outputLabel value="NOMBRE :"/>
+                                <p:outputLabel value="#{bean_login.nombre}" style="color: #0081c2"/>
+                                <p:outputLabel value="APELLIDO :"/>
+                                <p:outputLabel value="#{bean_login.apellido}" style="color: #0081c2"/>
+                                <p:outputLabel value="DEPARTAMENTO :"/>
+                                <p:outputLabel value="#{bean_login.departamento}" style="color: #0081c2"/>
+                                <p:outputLabel value="USUARIO :"/>
+                                <p:outputLabel value="#{bean_login.usuario}" style="color: #0081c2"/>
+                                <p:outputLabel value="CONTRASEÑA :"/>
+                                <p:outputLabel value="#{bean_login.pass}" style="color: #0081c2"/>
+                            </h:panelGrid>
+                        </h:form></center>
+                </p:dialog>
+
+                <p:dialog widgetVar="editar"> 
+                    <h:form id="editar">
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="ID GERENCIA :"/>                                
+                            <p:inputText value="#{bean_gerencia.id_gerencia}"  style="color: #0081c2" />
+                            <p:outputLabel value="CODIGO DE EMPLEADO :" />
+                            <p:inputText value="#{bean_gerencia.cod_empleado}" style="color: #0081c2"/>
+                            <p:outputLabel value="NOMBRE :"/>
+                            <p:inputText value="#{bean_gerencia.nombre}" style="color: #0081c2"/>
+                            <p:outputLabel value="APELLIDO :"/>
+                            <p:inputText value="#{bean_gerencia.apellido}" style="color: #0081c2"/>
+                            <p:outputLabel value="Departamento" />
+                            <p:selectOneMenu id="departamento" value="#{bean_gerencia.departamento}" required="true" requiredMessage="The Departamento field is required.">
+                                <f:selectItems value="#{bean_gerencia.listadepa}"  var="dep" itemValue="#{dep.idDepartamento}" itemLabel="#{dep.nombreDepartamento}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="USUARIO :"/>
+                            <p:inputText value="#{bean_gerencia.usuario}" style="color: #0081c2"/>
+                            <p:outputLabel value="CONTRASEÑA :"/>
+                            <p:password value="#{bean_gerencia.pass}" style="color: #0081c2"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </ui:insert>
+        </div>
+        <h:outputScript library="bootstrap/js" name="bootstrap.min.js"/>
+        <h:outputScript library="scripts/flot" name="jquery.flot.js"/>
+        <h:outputScript library="scripts/flot" name="jquery.flot.resize.js"/>
+        <h:outputScript library="scripts/datatables" name="jquery.dataTables.js"/>
+        <h:outputScript library="scripts" name="common.js"/>
+    </h:body>
+
+</html>

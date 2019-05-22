@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./principal.xhtml">
+
+            <ui:define name="content">
+                <table cellpadding="15px;">
+                    <td></td>
+                    <td>
+                        <p:growl>
+                            <p:autoUpdate/>
+                        </p:growl>
+                        <center> <h:form id="vista">
+                                <div class="tittle-table">
+                                    <center>
+                                        <div id="title">
+                                            Datos registrados de Productos
+                                        </div>
+                                    </center>
+                                </div>
+                                <br/>
+                                <br/>
+                                <p:dataTable style="text-align: center;" value="#{BeanProducto.listaProducto}" var="item">
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Codigo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codigo}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombre"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombre}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Precio"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.precio}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Categoria"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.categoria.nombreCategoria}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Proveedor"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.provedor.nombreProveedor}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Acciones"/>
+                                        </f:facet>
+                                        <p:commandButton icon="ui-icon-trash"  style="width: 110px;" value="Eliminar" actionListener="#{BeanProducto.borrar(item.codigo)}"/>
+                                        <p:commandButton update="form2"  style="width: 110px;" icon="ui-icon-pencil" value="Editar" onclick="PF('ventana').show()" actionListener="#{BeanProducto.consultar(item.codigo)}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <br/>
+                                <p:commandButton onclick="PF('ventana1').show();" icon="ui-icon-circle-plus" style="width: 350px;color: #000" value="INGRESAR NUEVO REGISTRO"/>
+                            </h:form></center>
+
+                        <p:dialog resizable="false"  widgetVar="ventana" modal="true" showEffect="fade">
+                            <center><h:form id="form2">
+                                    <h:panelGrid style="text-align: center;" columns="2" >
+                                        <p:outputLabel value="Codigo"/>
+                                        <p:inputText id="codigo" value="#{BeanProducto.producto.codigo}" title="Codigo" required="true" requiredMessage="The Codigo field is required."/>
+                                        <p:outputLabel value="Nombre"/>
+                                        <p:inputText id="nombre" value="#{BeanProducto.producto.nombre}" title="Nombre" />
+                                        <p:outputLabel value="Precio"/>
+                                        <p:inputText id="precio" value="#{BeanProducto.producto.precio}" title="Precio" />
+                                        <p:outputLabel value="Categoria"/>
+                                        <p:selectOneMenu id="categoria" value="#{BeanProducto.producto.categoria.idCategoria}" required="true" requiredMessage="The Categoria field is required.">
+                                            <f:selectItems value="#{BeanCategoria.listaCategoria}" var="c" itemLabel="#{c.nombreCategoria}" itemValue="#{c.idCategoria}"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Proveedor"/>
+                                        <p:selectOneMenu id="provedor" value="#{BeanProducto.producto.provedor.idProvedor}" required="true" requiredMessage="The Provedor field is required.">
+                                            <!-- TODO: update below reference to list of available items-->
+                                            <f:selectItems value="#{bean_proveedor.listaProveedor}" var="c" itemLabel="#{c.nombreProveedor}" itemValue="#{c.idProvedor}"/>
+                                        </p:selectOneMenu>
+                                    </h:panelGrid>
+                                    <br/>
+                                    <p:commandButton value="Actualizar" icon="ui-icon-circle-check" update=":vista" onclick="PF('ventana').close();" actionListener="#{BeanProducto.actualizar()}"/>
+                                </h:form></center>
+                        </p:dialog>
+
+                        <p:dialog widgetVar="ventana1" header="NUEVO REGISTRO" style="color: wheat" resizable="false" showEffect="fade" hideEffect="fade">
+                            <center><h:form id="ingreso">
+                                    <h:panelGrid columns="2">
+                                        <p:outputLabel value="Codigo"/>
+                                        <p:inputText id="codigo" value="#{BeanProducto.producto.codigo}" title="Codigo" required="true" requiredMessage="Codigo es requerido"/>
+                                        <p:outputLabel value="Nombre"/>
+                                        <p:inputText id="nombre" value="#{BeanProducto.producto.nombre}" title="Nombre" required="true" requiredMessage="Nombre es requerido"/>
+                                        <p:outputLabel value="Precio"/>
+                                        <p:inputText id="precio" value="#{BeanProducto.producto.precio}" title="Precio" required="true" requiredMessage="Precio es requerido"/>
+                                        <p:outputLabel value="Categoria"/>
+                                        <p:selectOneMenu id="categoria" value="#{BeanProducto.producto.categoria.idCategoria}" required="true" requiredMessage="The Categoria field is required.">
+                                            <f:selectItems value="#{BeanCategoria.listaCategoria}" var="c" itemLabel="#{c.nombreCategoria}" itemValue="#{c.idCategoria}"/>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Proveedor"/>
+                                        <p:selectOneMenu id="provedor" value="#{BeanProducto.producto.provedor.idProvedor}" required="true" requiredMessage="The Provedor field is required.">
+                                            <!-- TODO: update below reference to list of available items-->
+                                            <f:selectItems value="#{bean_proveedor.listaProveedor}" var="c" itemLabel="#{c.nombreProveedor}" itemValue="#{c.idProvedor}"/>
+                                        </p:selectOneMenu>
+                                    </h:panelGrid>
+                                    <p:commandButton onclick="PF('ventana1').close();" value="Guardar" icon="ui-icon-circle-plus" actionListener="#{BeanProducto.guardar()}" update=":vista"/>
+                                </h:form></center>
+                        </p:dialog>
+                    </td>
+                </table>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
