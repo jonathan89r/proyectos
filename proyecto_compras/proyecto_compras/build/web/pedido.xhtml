@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <ui:composition template="./principal.xhtml">
+            <ui:define name="content">
+                <table cellpadding="15px">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <h:outputStylesheet library="css" name="style-pedido.css"/>
+                            <p:growl>
+                                <p:autoUpdate/>
+                            </p:growl>
+                            <h:form id="formulario" style="border:  1px solid lightgray;">
+                                <center><h2 id="banner" style="height: 70px;"><div style="padding-top: 15px;">
+                                            Registrar nuevo pedido
+                                        </div></h2></center>
+                                <p:panelGrid columns="2" style="margin-left:  58px !important;">
+                                    <p:outputLabel value="Usuario"/>
+                                    <p:outputLabel value="#{validacion_login.ger.nombre} #{validacion_login.ger.apellido}"/>
+                                </p:panelGrid><br/>
+                                <center><p:panelGrid columns="4">
+                                        <p:outputLabel value="Fecha Solicitud"/>
+                                        <p:inputText id="fechaPedido" value="#{bean_pedidoP.fechaHoy}" title="FechaPedido" required="true" requiredMessage="The FechaPedido field is required.">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </p:inputText>
+
+                                        <p:outputLabel value="Fecha de entrega"/>
+                                        <p:calendar/>
+
+                                        <p:outputLabel value="Nombre del Producto"/>
+                                        <p:selectOneMenu id="cantidad" value="#{bean_pedidoP.cantidad}" required="true" requiredMessage="The Gerencia field is required.">
+                                            <f:selectItems value="#{bean_pedidoP.listapro}" var="can" itemValue="#{can.inventario.stock}" itemLabel="#{can.inventario.producto.nombre}"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="proyeccion de ventas"/>
+                                        <p:selectOneMenu id="proyeccion" value="#{bean_pedidoP.proyeccion}" required="true" requiredMessage="The Proyeccion field is required.">
+                                            <f:selectItems value="#{bean_pedidoP.listapro}" var="pro" itemLabel="#{pro.idProyeccion}" itemValue="#{pro.idProyeccion}"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Codigo del producto"/>
+                                        <p:selectOneMenu id="precio" value="#{bean_pedidoP.precio}" required="true" requiredMessage="The Gerencia field is required.">
+                                            <f:selectItems  value="#{bean_pedidoP.listapro}" var="pre" itemValue="#{pre.inventario.producto.precio}" itemLabel="#{pre.inventario.producto.codigo}"/>            
+                                        </p:selectOneMenu>
+                                        <h:inputHidden value="#{bean_pedidoP.codigo_pedido}"/>
+                                    </p:panelGrid></center><br/>
+                                <center>
+                                    <p:panelGrid columns="2">
+                                        <p:commandButton icon="ui-icon-grip-dotted-vertical" style="background: white !important;" onclick="PF('productos').show();"/>
+                                        <p:outputLabel value="Ver productos en inventario"/>
+
+                                        <p:commandButton icon="ui-icon-grip-dotted-vertical" style="background: white !important;" onclick="PF('ventas').show();"/>
+                                        <p:outputLabel value="Ver ventas mensuales pasadas"/>
+                                    </p:panelGrid>
+                                </center><br/>
+                                <center><p:commandButton value="Agregar" update=":form2 , vista , formulario" action="#{bean_pedidoP.guardar()}" style="color: black;font-weight: 300;width: 200px;height: 35px;background-color: #363636 !important;color: white;border: none;"/></center>
+                                <br/>
+                                <hr style="width: 80%;border: 1px solid #363636;margin: auto;"/>
+                                <br/>
+                                <p:panelGrid columns="4" style="margin: auto;width: 100%;">
+                                    <p:outputLabel>
+                                        Solicitado por <br/><strong><p:outputLabel value="#{validacion_login.ger.nombre} #{validacion_login.ger.apellido}"/></strong>
+                                    </p:outputLabel>
+                                    <p:outputLabel>
+                                        Autorizado por <br/><strong><p:outputLabel value="#{item.gerencia.nombre}"/></strong>
+                                    </p:outputLabel>
+                                    <p:outputLabel>
+                                        Encargado Dpto. Ventas <br/><strong><p:outputLabel value="Sergio Torres"/></strong>
+                                    </p:outputLabel>
+                                    <p:outputLabel>
+                                        Encargado Bodega <br/><strong><p:outputLabel value="Jose hernandez"/></strong>
+                                    </p:outputLabel>
+                                </p:panelGrid>
+                            </h:form><br/>
+                            <div style="width: 90%;margin: auto;">
+                                <h:form id="vista">
+                                    <p:dataTable value="#{bean_pedidoP.listapedido}" var="item" scrollRows="20" scrollable="true" liveScroll="true" scrollHeight="250"><p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="ID"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.codigoPedido}"/>
+                                            <h:inputHidden value="#{item.codigoPedido}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Codigo Producto"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.proyeccion.inventario.producto.codigo}"/>
+                                            <h:inputHidden value="#{item.codigoPedido}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Nombre Producto"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.proyeccion.inventario.producto.nombre}"/>
+                                            <h:inputHidden value="#{item.gerencia}"/>
+                                            <h:inputHidden value="#{item.proyeccion}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="FechaPedido"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.fechaPedido}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Iva"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.iva}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Total"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.total}"/>
+                                        </p:column>                        
+                                    </p:dataTable>
+                                    <br/>
+                                </h:form>
+                            </div>
+                            <p:dialog widgetVar="productos" showEffect="fade" hideEffect="fade" resizable="false" width="600">
+                                <h:form id="form2">
+                                    <p:dataTable value="#{bean_pedidoP.lista}" var="item" style="background: white;">
+                                        <p:column headerText="Codigo">
+                                            <h:outputText value="#{item.codigo}"/>
+                                        </p:column>
+                                        <p:column headerText="Nombre">
+                                            <h:outputText value="#{item.nombre}"/>
+                                        </p:column>
+                                        <p:column headerText="Stock">
+                                            <h:outputText value="#{item.stock}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:dialog>
+                            <p:dialog widgetVar="ventas" showEffect="fade" hideEffect="fade" resizable="false" width="900">
+                                <h:form>
+                                    <p:dataTable value="#{bean_pedidoP.listaVenta}" var="s" style="background: white;">
+                                        <p:column headerText="Codigo">
+                                            <h:outputText value="#{s.codigo.codigo}"/>
+                                        </p:column>
+                                        <p:column headerText="Nombre del producto">
+                                            <h:outputText value="#{s.codigo.nombre}"/>
+                                        </p:column>
+                                        <p:column headerText="cantidad vendida">
+                                            <h:outputText value="#{s.cantidad}"/>
+                                        </p:column>
+                                        <p:column headerText="Vendedor">
+                                            <h:outputText value="#{s.codigo.provedor.nombreProveedor}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:form>
+                            </p:dialog>
+                        </td>
+                    </tr>
+                </table>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

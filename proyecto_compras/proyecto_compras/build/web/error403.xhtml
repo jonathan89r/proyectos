@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Error 403</title>
+        <link rel="shortcut icon"  href="#{request.contextPath}/resources/image/icono.ico"/>
+
+    </h:head>
+    <style>
+        #close:hover {
+            background: white !important;
+            color: black !important;
+            border: 1px solid #444;
+
+        }
+    </style>
+    <h:body>
+        <br/>
+        <br/>
+        <br/>
+        <table style="border-radius: 15px;margin: 0 auto;box-shadow: 6px 6px 2px #777,12px 12px 8px #444;margin-top: 50px;">
+            <th style="background-color: red;width: 270px;height: 110px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                <p:graphicImage library="images" name="error.png" style="width: 75px;height: 60px;" />
+            </th>
+            <tr><td style="background-color: white;width: 300px;height: 130px;border: #ccffff;
+                    text-align: center;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;font-family: arial;">
+                    <h1>ERROR 403</h1>
+                    <b>Forbidden</b>
+                    <br/><br/>
+                    Acces to this resources<br/>
+                    on the server is deniend!.
+                    <br/>
+                    <br/>
+
+                    <a href="faces/index.xhtml" style="text-decoration: none;"> <input type="submit" value="Come back" align="center" id="close"
+                                                                                       style=" color: white;border-radius: 15px;font-family: arial;width: 60%; height: 40px;transition: background-color 0.5s ease;
+                                                                                       background-color: red;border: none;font-size: 17px;"/></a>
+                    <br/>
+                    <br/>
+                </td>
+            </tr>
+        </table>
+
+
+    </h:body>
+</html>
+

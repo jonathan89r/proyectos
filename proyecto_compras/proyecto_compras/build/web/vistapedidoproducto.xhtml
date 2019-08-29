@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="./principal.xhtml">
+
+            <ui:define name="content">
+                <table cellpadding="15px">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <p:growl>
+                                <p:autoUpdate/>
+                            </p:growl>
+                            <center><h:form id="vista">
+                                    <div class="tittle-table">
+                                        <center>
+                                            <div id="title">
+                                                Datos registrados de los pedidos
+                                            </div>
+                                        </center>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                    <p:dataTable value="#{bean_estado_pedido.listaesped}" var="item">
+                                        <p:column style="width: 50px;text-align: center;">
+                                            <f:facet name="header">
+                                                <h:outputText value="Codigo"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.codigoPedido.codigoPedido}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Solicitado por"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.codigoPedido.gerencia.nombre} , departarmento de #{item.codigoPedido.gerencia.departamento.nombreDepartamento}"/>
+                                        </p:column>
+                                        <p:column style="width: 100px;text-align: center;">
+                                            <f:facet name="header">
+                                                <h:outputText value="fecha de estado"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.fechaEstado}"/>
+                                        </p:column>
+                                        <p:column style="width: 100px;text-align: center;">
+                                            <f:facet name="header">
+                                                <h:outputText value="estado"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.estado.nombre}"/>
+                                        </p:column>
+
+
+                                        <p:column style="width: 170px;">
+                                            <f:facet name="header">
+                                                <h:outputText value="Actions"/>
+                                            </f:facet>
+                                            <p:commandButton value="borrar" actionListener="#{bean_estado_pedido.eliminar(item.idEstadoPedido)}" update="vista"/>
+                                            <p:commandButton update="form2" value="editar" onclick="PF('ventana').show()" actionListener="#{bean_estado_pedido.mostrarPorID(item.idEstadoPedido)}"/>
+
+                                        </p:column>
+
+                                    </p:dataTable>
+                                    <br/>
+                                    <br/>
+                                </h:form></center>
+
+                            <br/><br/>
+                            <p:dialog widgetVar="ventana" modal="true" showEffect="fade" resizable="flase">
+                                <h:form id="form2">
+                                    <p:panelGrid columns="2" >
+                                        <p:outputLabel value="id_estado_pedido" />
+                                        <p:inputText id="id_estado_pedido" value="#{bean_estado_pedido.id_estado_pedido}" title="estado pedido"/>
+
+                                        <p:outputLabel value="Codigo"  />
+                                        <p:inputText id="codigo" value="#{bean_estado_pedido.codigo_pedido}" title="Codigo" required="true" requiredMessage="The Codigo field is required." />
+                                        <p:outputLabel value="fecha"  />
+                                        <p:inputText id="fecha" value="#{bean_estado_pedido.fecha_estado}" title="fecha" />
+
+                                        <p:outputLabel value="estado"  />
+                                        <p:selectOneMenu id="estado" value="#{bean_estado_pedido.estado}" required="true" requiredMessage="The estado field is required.">
+                                            <f:selectItems value="#{bean_estado_pedido.listestado}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.idEstado}"/>
+                                        </p:selectOneMenu>
+
+
+                                    </p:panelGrid>
+                                    <p:commandButton value="Actualizar" actionListener="#{bean_estado_pedido.actualizar(item.idEstadoPedido)}" update="vista"/>
+                                </h:form>
+                            </p:dialog>
+                        </td>
+                    </tr>
+                </table>  
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
